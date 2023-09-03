@@ -49,7 +49,10 @@ public class DriveTrain extends SubsystemBase{
     //gyro
     private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
 
-        /** Updates the field relative position of the robot. */
+        /*
+         * Swerve Drive Odometry
+         * 
+         */
     private final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(DriveConstants.kDriveKinematics, Rotation2d.fromDegrees(m_gyro.getAngle()),
       new SwerveModulePosition[] {
       m_frontLeft.getPosition(),
@@ -57,4 +60,5 @@ public class DriveTrain extends SubsystemBase{
       m_rearLeft.getPosition(),
       m_rearRight.getPosition()
   });
+  
 }

@@ -4,21 +4,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
-
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -26,10 +14,6 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
-import frc.robot.subsystems.DriveTrain;
-
-//Constant imports??
-import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 
 public class SwerveModules {
@@ -194,43 +178,31 @@ public class SwerveModules {
         new Rotation2d(m_turningEncoder.getPosition() - m_chassisAngularOffset));
   }
 
-}
-
   /**
    * Sets the desired state for the module.
    *
    * @param desiredState Desired state with speed and angle.
    */
   public void setDesiredState(SwerveModuleState desiredState) {
-    // Optimize the reference state to avoid spinning further than 90 degrees
-    SwerveModuleState state =
-        SwerveModuleState.optimize(desiredState, new Rotation2d(m_turningEncoder.getDistance()));
+    // Apply chassis angular offset to the desired state.
+    SwerveModuleState correctedDesiredState = new SwerveModuleState();
+    correctedDesiredState.speedMetersPerSecond = desiredState.speedMetersPerSecond;
+    correctedDesiredState.angle = desiredState.angle.plus(Rotation2d.fromRadians(m_chassisAngularOffset));
 
-    // Calculate the drive output from the drive PID controller.
-    final double driveOutput =
-        m_drivePIDController.calculate(m_driveEncoder.getRate(), state.speedMetersPerSecond);
+    // Optimize the reference state to avoid spinning further than 90 degrees.
+    SwerveModuleState optimizedDesiredState = SwerveModuleState.optimize(correctedDesiredState,
+        new Rotation2d(m_turningEncoder.getPosition()));
 
-    final double driveFeedforward = m_driveFeedforward.calculate(state.speedMetersPerSecond);
+    // Command driving and turning SPARKS MAX towards their respective setpoints.
+    m_drivingPIDController.setReference(optimizedDesiredState.speedMetersPerSecond, CANSparkMax.ControlType.kVelocity);
+    m_turningPIDController.setReference(optimizedDesiredState.angle.getRadians(), CANSparkMax.ControlType.kPosition);
 
-    // Calculate the turning motor output from the turning PID controller.
-    final double turnOutput =
-        m_turningPIDController.calculate(m_turningEncoder.getDistance(), state.angle.getRadians());
-
-    final double turnFeedforward =
-        m_turnFeedforward.calculate(m_turningPIDController.getSetpoint().velocity);
-
-    m_driveMotor.setVoltage(driveOutput + driveFeedforward);
-    m_turningMotor.setVoltage(turnOutput + turnFeedforward);
-
-    /**
-   * Constructs a SwerveModules with a drive motor, turning motor, drive encoder and turning encoder.
-   *
-   * @param driveMotorChannel PWM output for the drive motor.
-   * @param turningMotorChannel PWM output for the turning motor.
-   * @param driveEncoderChannelA DIO input for the drive encoder channel A
-   * @param driveEncoderChannelB DIO input for the drive encoder channel B
-   * @param turningEncoderChannelA DIO input for the turning encoder channel A
-   * @param turningEncoderChannelB DIO input for the turning encoder channel B
-   */
+    m_desiredState = desiredState;
   }
+
+  /** Zeroes all the SwerveModule encoders. */
+  public void resetEncoders() {
+    m_drivingEncoder.setPosition(0);
+  }
+}
 }
