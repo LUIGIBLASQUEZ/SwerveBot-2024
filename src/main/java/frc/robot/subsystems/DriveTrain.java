@@ -11,10 +11,10 @@ import frc.robot.Constants.DriveConstants;
 
 public class DriveTrain extends SubsystemBase{
 
-    // public final MAXSwerveModules m_frontLeft = new MAXSwerveModules(
-    //     DriveConstants.kLFDriveID,
-    //     DriveConstants.kLFTurnID,
-    //     DriveConstants.kFrontLeftChassisAngularOffset);
+     public final MAXSwerveModules m_frontLeft = new MAXSwerveModules(
+         DriveConstants.kLFDriveID,
+         DriveConstants.kLFTurnID,
+         DriveConstants.kFrontLeftChassisAngularOffset);
     
     private final MAXSwerveModules m_frontRight = new MAXSwerveModules(
         DriveConstants.kRFDriveID,
