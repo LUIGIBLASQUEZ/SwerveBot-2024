@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.DriveConstants;
 //import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.SwerveModules;
+import frc.robot.subsystems.MAXSwerveModules;
 
 public class Robot extends TimedRobot {
   private final XboxController m_controller = new XboxController(0);
-  private final SwerveModules m_swerve = new SwerveModules();
+  //private final MAXSwerveModules m_swerve = new MAXSwerveModules();
 
   // Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0 to 1.
   private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
