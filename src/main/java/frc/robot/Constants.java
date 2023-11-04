@@ -51,6 +51,8 @@ public final class Constants {
         public static final int kRBTurnID = 7;
         public static final int kRBDriveID = 8;
 
+        public static final boolean kGyroReversed = false;
+
         // Slew Rates and Speeds
         public static final double kMaxSpeedMetersPerSecond = 5.0;
         public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
