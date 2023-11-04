@@ -19,7 +19,13 @@ public final class Constants {
      * Wrapper class for groups of constants
      * 
      */
-
+    //FOR CONNECTION STUFF
+    public static final class OIConstants {
+        public static final int kDriverControllerPortXbox = 0;
+        public static final int kDRiverControllerPortStick = 1;
+        public static final double kDriveDeadband = 0.05;
+      }
+    //FOR MOST DRIVING STUFF
     public static class DriveConstants {
         /*
          * FOR MOTOR IDs:
