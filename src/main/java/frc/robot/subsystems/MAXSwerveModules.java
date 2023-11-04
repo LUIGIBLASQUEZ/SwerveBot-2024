@@ -16,7 +16,7 @@ import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import frc.robot.Constants.DriveConstants;
 
-public class SwerveModules {
+public class MAXSwerveModules {
   /*
   private static final double kModuleMaxAngularVelocity = Drivetrain.kMaxAngularSpeed;
   private static final double kModuleMaxAngularAcceleration =
@@ -45,7 +45,6 @@ public class SwerveModules {
   private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(1, 3);
   private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(1, 0.5);
   */          
-  public class MAXSwerveModules {
     private final CANSparkMax m_drivingSparkMax;
     private final CANSparkMax m_turningSparkMax;
 
@@ -204,5 +203,4 @@ public class SwerveModules {
   public void resetEncoders() {
     m_drivingEncoder.setPosition(0);
   }
-}
 }
