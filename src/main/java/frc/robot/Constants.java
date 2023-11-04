@@ -51,14 +51,20 @@ public final class Constants {
         public static final int kRBTurnID = 7;
         public static final int kRBDriveID = 8;
 
+        // Slew Rates and Speeds
+        public static final double kMaxSpeedMetersPerSecond = 5.0;
+        public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
+
+        public static final double kDirectionSlewRate = 1.2; // radians per second
+        public static final double kMagnitudeSlewRate = 1.8; // percent per second (1 = 100%)
+        public static final double kRotationalSlewRate = 2.0; // percent per second (1 = 100%)
+
+
         // Angular offsets of the modules relative to the chassis in radians
         public static final double kFrontLeftChassisAngularOffset = -Math.PI / 2;
         public static final double kFrontRightChassisAngularOffset = 0;
         public static final double kBackLeftChassisAngularOffset = Math.PI;
         public static final double kBackRightChassisAngularOffset = Math.PI / 2;
-
-        public static final double kMaxSpeed = 3.0;
-        public static final double kMaxAngularSpeed = Math.PI;
         //MEASURE IN INCHES
         private static final double kWheelDiameter = 3.0; //temp until accurate
         private static final double kWheelCircumference = 9.43; //rounded to two points
@@ -96,7 +102,7 @@ public final class Constants {
 
         public static final double kDrivingEncoderPositionFactor = (kWheelDiameter * Math.PI)
         / kDrivingMotorReduction; // meters
-    public static final double kDrivingEncoderVelocityFactor = ((kWheelDiameter * Math.PI)
+        public static final double kDrivingEncoderVelocityFactor = ((kWheelDiameter * Math.PI)
         / kDrivingMotorReduction) / 60.0; // meters per second
 
         //FIX LATER
