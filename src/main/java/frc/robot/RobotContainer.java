@@ -4,29 +4,15 @@
 
 package frc.robot;
 
-//COMPLICATED IMPORTS
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 //CONTROLLER IMPORTS
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-//CONSTANT IMPORTS
-import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.Constants.OIConstants;
 //ETC IMPORTS (STILL IMPORTANT)
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
-import java.util.List;
 
 /*
  * RobotContainer manages the controllers, basically
@@ -63,10 +49,13 @@ public class RobotContainer {
     // Configure default commands
     m_robotDrive.setDefaultCommand(
         new RunCommand(
-            m_robotDrive,
+          () ->
+            m_robotDrive.drive(
             -JOYSTICKop.getRawAxis(translationAxis),
             -JOYSTICKop.getRawAxis(strafeAxis),
             -JOYSTICKop.getRawAxis(rotationAxis),
+            true, true
+            ), m_robotDrive
             ));
         /* 
         new RunCommand(
@@ -89,7 +78,7 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_driverController, Button.kR1.value)
+    new JoystickButton(JOYSTICKop, 1)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.stop(),
             m_robotDrive));
