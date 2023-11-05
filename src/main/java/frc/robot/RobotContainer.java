@@ -23,22 +23,15 @@ public class RobotContainer {
   // SUBSYSTEMS (add more later for whatever subsystems are added)
   private final DriveTrain m_robotDrive = new DriveTrain();
 
-  // CONTROLLERS (id say just stick to these two)
+  // CONTROLLERS (id recommend just stick to these two)
   XboxController XBOXop = new XboxController(OIConstants.kDriverControllerPortXbox);
   Joystick JOYSTICKop = new Joystick(OIConstants.kDRiverControllerPortStick);
 
-  // CONTROL VALUES (dw about these)
-  private final int translationAxis = XboxController.Axis.kLeftY.value;
-  private final int strafeAxis = XboxController.Axis.kLeftX.value;
-  private final int rotationAxis = XboxController.Axis.kRightX.value;
-
-  // TEST JOYSTICK BUTTONS (who knows, don't ask me (you can))
+  // CONTROL VALUES (ids pertaining to the controller imports)
+  private final int translationAxis = Joystick.AxisType.kY.value;
+  private final int strafeAxis = Joystick.AxisType.kX.value;
+  private final int rotationAxis = Joystick.AxisType.kTwist.value;
   
-  /** there should be something here, but there isn't
-   *  how sad
-   * 
-   * /
-
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -46,6 +39,8 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
+    // !!SPEED SHOULD BE HANDLED IN CONSTANTS!!
+    
     // Configure default commands
     m_robotDrive.setDefaultCommand(
         new RunCommand(
