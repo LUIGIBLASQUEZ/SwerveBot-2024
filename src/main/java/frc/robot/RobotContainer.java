@@ -61,9 +61,21 @@ public class RobotContainer {
    * 
    */
   private void configureButtonBindings() {
+
+    // Stop method that stops all movement while held down
     new JoystickButton(JOYSTICKop, 1)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.stop(),
+            m_robotDrive));
+
+    new JoystickButton(JOYSTICKop, 3)
+        .whileTrue(new RunCommand(
+            () -> m_robotDrive.faster(),
+            m_robotDrive));
+
+    new JoystickButton(JOYSTICKop, 4)
+        .whileTrue(new RunCommand(
+            () -> m_robotDrive.slower(),
             m_robotDrive));
   }
 

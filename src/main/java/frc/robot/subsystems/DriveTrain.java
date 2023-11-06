@@ -160,14 +160,6 @@ public class DriveTrain extends SubsystemBase{
       m_rearRight.setDesiredState(swerveModuleStates[3]);
     }
 
-    // Command that turns all wheels into an X as well as speed to 0 to stop movement
-    public void stop() {
-      m_frontLeft.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(45)));
-      m_frontRight.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(-45)));
-      m_rearLeft.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(-45)));
-      m_rearRight.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(45)));
-    }
-
     // Sets Swerve Module states
     public void setModuleStates(SwerveModuleState[] desiredStates) {
       SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kMaxSpeedMetersPerSecond);
@@ -198,5 +190,35 @@ public class DriveTrain extends SubsystemBase{
     // Returns turn rate of the robot
     public double getTurnRate() {
       return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+    }
+
+    /*
+     * Extra DriveTrain commands
+     * Bound to JoystickButton
+     * 
+     */
+
+    // Turns all wheels into an X as well as speed to 0 to stop movement
+    public void stop() {
+      m_frontLeft.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(45)));
+      m_frontRight.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(-45)));
+      m_rearLeft.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(-45)));
+      m_rearRight.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(45)));
+    }
+
+    // Slows down movement while button is held down
+    public void slower() {
+      m_frontLeft.setDesiredState(new SwerveModuleState(2.5, null));
+      m_frontRight.setDesiredState(new SwerveModuleState(2.5, null));
+      m_rearLeft.setDesiredState(new SwerveModuleState(2.5, null));
+      m_rearRight.setDesiredState(new SwerveModuleState(2.5, null)); 
+    }
+
+    // Speeds up movement while button is held down
+    public void faster() {
+      m_frontLeft.setDesiredState(new SwerveModuleState(7.5, null));
+      m_frontRight.setDesiredState(new SwerveModuleState(7.5, null));
+      m_rearLeft.setDesiredState(new SwerveModuleState(7.5, null));
+      m_rearRight.setDesiredState(new SwerveModuleState(7.5, null)); 
     }
 }
