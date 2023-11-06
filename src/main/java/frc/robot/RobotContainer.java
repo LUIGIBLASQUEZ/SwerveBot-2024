@@ -1,47 +1,47 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
-//CONTROLLER IMPORTS
+/* IMPORTS */
+
+// Controllers
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+// Subsystems
 import frc.robot.subsystems.DriveTrain;
+// Constants
 import frc.robot.Constants.OIConstants;
-//ETC IMPORTS (STILL IMPORTANT)
+// Other
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
 /*
- * RobotContainer manages the controllers, basically
- * (i hope no one asks me questions about it because its very blunt)
+ * RobotContainer.java contains the robot, as well as the bindings that
+ * commands are set too on controllers, etc
  * 
  */
+
 public class RobotContainer {
-  // SUBSYSTEMS (add more later for whatever subsystems are added)
+  // SUBSYSTEMS 
+  // (add more as they come)
   private final DriveTrain m_robotDrive = new DriveTrain();
 
-  // CONTROLLERS (id recommend just stick to these two)
+  // CONTROLLERS 
+  // (please stick to just two)
   XboxController XBOXop = new XboxController(OIConstants.kDriverControllerPortXbox);
   Joystick JOYSTICKop = new Joystick(OIConstants.kDRiverControllerPortStick);
 
-  // CONTROL VALUES (ids pertaining to the controller imports)
+  // CONTROL VALUES 
+  // (input channels from the controller imports)
   private final int translationAxis = Joystick.AxisType.kY.value;
   private final int strafeAxis = Joystick.AxisType.kX.value;
   private final int rotationAxis = Joystick.AxisType.kTwist.value;
   
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
+  /* Robot container, with constants, commands, and controllers */
+
   public RobotContainer() {
-    // Configure the button bindings
     configureButtonBindings();
 
     // !!SPEED SHOULD BE HANDLED IN CONSTANTS!!
-    
-    // Configure default commands
     m_robotDrive.setDefaultCommand(
         new RunCommand(
           () ->
@@ -51,26 +51,14 @@ public class RobotContainer {
             -JOYSTICKop.getRawAxis(rotationAxis),
             true, true
             ), m_robotDrive
-            ));
-        /* 
-        new RunCommand(
-            () -> m_robotDrive.drive(
-                -MathUtil.applyDeadband(JOYSTICKop.getLeftY(), OIConstants.kDriveDeadband),
-                -MathUtil.applyDeadband(JOYSTICKop.getLeftX(), OIConstants.kDriveDeadband),
-                -MathUtil.applyDeadband(JOYSTICKop.getRightX(), OIConstants.kDriveDeadband),
-                true, true),
-            m_robotDrive));
-        */
+        )
+    );
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by
-   * instantiating a {@link edu.wpi.first.wpilibj.GenericHID} or one of its
-   * subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then calling
-   * passing it to a
-   * {@link JoystickButton}.
+   * Method defining button command mappings
+   * Use imports from the controllers
+   * 
    */
   private void configureButtonBindings() {
     new JoystickButton(JOYSTICKop, 1)
@@ -80,9 +68,8 @@ public class RobotContainer {
   }
 
   /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
+   * Basic command passing an autonomous function to the main Robot class
+   * 
    */
   public Command getAutonomousCommand() {
     // basically a placeholder
