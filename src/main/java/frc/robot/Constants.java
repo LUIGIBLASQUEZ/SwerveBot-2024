@@ -4,7 +4,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 
-// Legacy of 2024 controls team (we existed)
+// Legacy of 2024 team 691 controls team (we existed)
 
 /*
  * Constants class holds all the variables, (such as motor ids or subsystem values)
