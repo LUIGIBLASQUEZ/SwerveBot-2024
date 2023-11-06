@@ -206,7 +206,9 @@ public class DriveTrain extends SubsystemBase{
       m_rearRight.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(45)));
     }
 
-    // Slows down movement while button is held down
+    // !!BELOW REQUIRE TESTING, ESPECIALLY THE ANGLE "null" VALUES!!
+
+    // Slows down translation speed while button is held down
     public void slower() {
       m_frontLeft.setDesiredState(new SwerveModuleState(2.5, null));
       m_frontRight.setDesiredState(new SwerveModuleState(2.5, null));
@@ -214,7 +216,7 @@ public class DriveTrain extends SubsystemBase{
       m_rearRight.setDesiredState(new SwerveModuleState(2.5, null)); 
     }
 
-    // Speeds up movement while button is held down
+    // Speeds up translation speed while button is held down
     public void faster() {
       m_frontLeft.setDesiredState(new SwerveModuleState(7.5, null));
       m_frontRight.setDesiredState(new SwerveModuleState(7.5, null));
