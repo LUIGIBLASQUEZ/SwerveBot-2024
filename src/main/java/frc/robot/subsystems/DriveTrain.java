@@ -210,17 +210,17 @@ public class DriveTrain extends SubsystemBase{
 
     // Slows down translation speed while button is held down
     public void slower() {
-      m_frontLeft.setDesiredState(new SwerveModuleState(2.5, null));
-      m_frontRight.setDesiredState(new SwerveModuleState(2.5, null));
-      m_rearLeft.setDesiredState(new SwerveModuleState(2.5, null));
-      m_rearRight.setDesiredState(new SwerveModuleState(2.5, null)); 
+      m_frontLeft.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*0.5, null));
+      m_frontRight.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*0.5, null));
+      m_rearLeft.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*0.5, null));
+      m_rearRight.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*0.5, null)); 
     }
 
     // Speeds up translation speed while button is held down
     public void faster() {
-      m_frontLeft.setDesiredState(new SwerveModuleState(7.5, null));
-      m_frontRight.setDesiredState(new SwerveModuleState(7.5, null));
-      m_rearLeft.setDesiredState(new SwerveModuleState(7.5, null));
-      m_rearRight.setDesiredState(new SwerveModuleState(7.5, null)); 
+      m_frontLeft.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*1.5, null));
+      m_frontRight.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*1.5, null));
+      m_rearLeft.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*1.5, null));
+      m_rearRight.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*1.5, null)); 
     }
 }

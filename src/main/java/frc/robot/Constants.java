@@ -58,7 +58,7 @@ public final class Constants {
         public static final boolean kGyroReversed = false;
 
         // Slew Rates and Speeds
-        public static final double kMaxSpeedMetersPerSecond = 5.0; // Main translation speed value
+        public static final double kMaxSpeedMetersPerSecond = 2.0; // Main translation speed value
         public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
         public static final double kDirectionSlewRate = 1.2; // radians per second
         public static final double kMagnitudeSlewRate = 1.8; // percent per second (1 = 100%)
