@@ -223,4 +223,12 @@ public class DriveTrain extends SubsystemBase{
       m_rearLeft.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*1.5, null));
       m_rearRight.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*1.5, null)); 
     }
+
+    // TEMPORARY
+    public void test() {
+      m_frontLeft.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*0.5, Rotation2d.fromDegrees(0)));
+      m_frontRight.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*0.5, Rotation2d.fromDegrees(0)));
+      m_rearLeft.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*0.5, Rotation2d.fromDegrees(0)));
+      m_rearRight.setDesiredState(new SwerveModuleState(DriveConstants.kMaxSpeedMetersPerSecond*0.5, Rotation2d.fromDegrees(0))); 
+    }
 }
