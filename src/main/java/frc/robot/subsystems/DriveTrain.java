@@ -30,15 +30,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class DriveTrain extends SubsystemBase{
 
   // REV Robotics Swerve Modules objects
-     public final MAXSwerveModules m_frontLeft = new MAXSwerveModules(
+     private final MAXSwerveModules m_frontLeft = new MAXSwerveModules(
          DriveConstants.kLFDriveID,
          DriveConstants.kLFTurnID,
          DriveConstants.kFrontLeftChassisAngularOffset);
     
-    private final MAXSwerveModules m_frontRight = new MAXSwerveModules(
+     private final MAXSwerveModules m_frontRight = new MAXSwerveModules(
         DriveConstants.kRFDriveID,
         DriveConstants.kRFTurnID,
         DriveConstants.kFrontRightChassisAngularOffset);
+        
   
     private final MAXSwerveModules m_rearLeft = new MAXSwerveModules(
         DriveConstants.kLBDriveID,
