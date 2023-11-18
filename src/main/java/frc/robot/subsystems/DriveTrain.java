@@ -75,6 +75,31 @@ public class DriveTrain extends SubsystemBase{
       }
     );
 
+
+    //ATTEMPT !!!!!!!!!
+    public void periodic() {
+      // Update the odometry in the periodic block
+      m_odometry.update(
+          Rotation2d.fromDegrees(m_gyro.getAngle()),
+          new SwerveModulePosition[] {
+              m_frontLeft.getPosition(),
+              m_frontRight.getPosition(),
+              m_rearLeft.getPosition(),
+              m_rearRight.getPosition()
+          });
+    }
+  
+    /**
+     * Returns the currently-estimated pose of the robot.
+     *
+     * @return The pose.
+     */
+    public Pose2d getPose() {
+      return m_odometry.getPoseMeters();
+    }
+
+    //END OF ATTEMPT !!!!!!
+
     // Resets odemetry to desired position
     public void resetOdometry(Pose2d pose) {
       m_odometry.resetPosition(
